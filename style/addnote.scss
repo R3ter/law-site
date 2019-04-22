@@ -1,0 +1,21 @@
+.addnote{
+    color:white;
+    div{
+       
+        margin: 2rem;
+    }
+    input[type=submit]{
+        background-color: rgb(110, 14, 14);
+        color: white;
+        border: none;
+        padding: 1rem;
+        cursor: pointer;
+        border: 1px solid rgb(85, 1, 1);
+        border-radius: 5px;
+        padding-right: 30%;
+        padding-left: 30%;
+    }
+    input[type=submit]:hover{
+        background-color: rgb(58, 7, 7);
+    }
+}

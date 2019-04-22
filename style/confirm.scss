@@ -1,0 +1,106 @@
+.confirm{
+    width: 100%;
+    height: 100%;
+    color:white;
+    position: fixed;
+    z-index: 9999999;
+    background-color: rgba(0, 0, 0, 0.5);
+    left:0rem;
+    top :0rem;
+    div{
+        margin-top: 8rem;
+        display: flex;
+        justify-content: center;
+        button{
+            opacity: 1;
+            margin: 2rem;
+            background-color: rgb(255, 56, 56);
+        }
+
+    }
+    h2{
+        margin-top: 4rem;
+        text-align: center;
+        word-break: break-all;
+    }
+    h1{
+        margin-top: 10rem;
+        text-align: center;
+        word-break: break-all;
+    }
+}
+.tellwrorning{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.568);
+    position: fixed;
+    right: 0rem;
+    top: 0rem;
+    :first-child{
+        font-size: 350%;
+    }
+    h1{
+        text-align: center;
+        margin-top: 5rem;
+        word-break: break-all;
+        color: rgb(248, 33, 33);
+    }
+    h2{
+        text-align: center;
+        margin-top: 5rem;
+        word-break: break-all;
+        color: rgb(248, 33, 33);
+    }
+
+}
+.tellinfo{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.568);
+    position: fixed;
+    right: 0rem;
+    top: 0rem;
+    :first-child{
+        font-size: 350%;
+    }
+    h1{
+        text-align: center;
+        margin-top: 5rem;
+        word-break: break-all;
+        color: rgb(35, 136, 150);
+    }
+    h2{
+        text-align: center;
+        margin-top: 5rem;
+        word-break: break-all;
+        color: rgb(35, 136, 150);
+    }
+
+}
+
+.hidewindow{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.668);
+    position: fixed;
+    right: 0rem;
+    top: 0rem;
+    :first-child{
+        font-size: 350%;
+    }
+    h1{
+        word-break: break-all;
+        text-align: center;
+        margin-top: 5rem;
+        color:white;
+    }
+    h2{
+        text-align: center;
+        margin-top: 5rem;
+        word-break: break-all;
+        color: rgb(255, 255, 255);
+    }
+    opacity: 0;
+    transition: .5s;    
+
+}

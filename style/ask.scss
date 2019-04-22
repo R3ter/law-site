@@ -1,0 +1,27 @@
+.ask{
+    color:white;
+    display: block;
+    margin: 3 auto;
+    left: -50%;
+    width: 50%;
+    text-align: center;
+    background-color: rgba(80, 0, 37, 0.548);
+    border: none;
+    padding-top: 1rem;
+    *{
+        margin: 1rem;
+        direction: rtl;
+    }
+    input{
+        padding: .51rem;
+        width: 60%;
+    }
+    textarea{
+        width: 80%;
+        resize:vertical;
+        
+    }
+    input[type=submit]{
+        width: 25%;
+    }
+}

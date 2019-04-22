@@ -1,0 +1,135 @@
+
+body {
+    margin:0; 
+    // direction: rtl;
+}
+
+.top{
+    .sign{
+        position: absolute;
+        float: left;
+        top:10%;
+    }
+    margin: 0rem;
+    padding: 0rem;
+    height: 55vh;
+    background-image:url("../img/img1.jpg");
+    background-size: cover;
+    background-position: top;
+    clip-path: polygon(0 0,100% 0,100% 48vh,0 100%);
+
+    input[type=text]{
+        margin-bottom: 8vh;
+        padding: .2rem;
+        border:none;
+        background-color: rgba(255, 0, 21, 0.589);
+        color:white;
+        border:3px solid red;
+
+    }
+    input[type=submit]{
+     color: white;
+     border: none;
+     cursor: pointer;
+     background-color: rgba(0, 0, 0, 0);
+     margin-left: .2rem;
+     margin-top: 1rem;
+     padding: 1rem;
+
+    }
+        text-align: center;
+        color:white;
+        h1{
+            margin: 5vh;
+            display:inline-block;
+            animation-name: right;
+            animation-duration: 3s;
+        }
+        p{
+            display:inline-block;
+            margin-bottom: 12vh;
+            animation-name: left;
+            animation-duration: 3s;
+        }
+}
+
+   button{
+       background-color: rgba(106, 255, 243, 0.253);
+       border: none;
+       white-space: nowrap;
+       margin: .5rem;
+       padding:1rem;
+       position: relative;
+       height: 60px;
+       width: 70.3px;
+       cursor: pointer;
+       border-radius: 1rem;
+    }
+    button:focus{outline:0;}
+    input[type=submit]:focus{outline:0;}
+    button:hover{
+    //    background-color: rgba(255, 36, 91, 0.445);
+        
+        background-color: rgba(106, 255, 243, 0.651);
+       color: rgb(255, 255, 255);
+    }
+    .buttons::after{
+        
+        animation-name: click;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;        
+        
+    }
+    
+    @keyframes click{
+        0%{
+            transform: scale(1);
+            opacity: 1;
+        }
+        80%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 0;
+            transform: scale(1.4);
+        }
+        
+    }
+    button::after{
+        content: "";
+        height: 100%;
+        width: 100%;
+        box-shadow: 0 10px 10px rgba(20, 5, 9, 0.445);
+        display:inline-block;
+        top:0;
+        background-color: rgba(106, 255, 243, 0.253);
+        left:0;
+        z-index: -1;
+        position: absolute;
+        border-radius: 1rem;
+        // background-color:rgba(255, 36, 91, 0.445);
+        opacity: 1;
+        
+    }
+    
+    
+    @keyframes right{
+    0%{
+        opacity:0;
+        transform: translateX(-150px)
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0px)
+    }
+}
+@keyframes left{
+    0%{
+        opacity:0;
+        transform: translateX(150px)
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0px)
+    }
+}

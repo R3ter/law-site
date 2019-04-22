@@ -1,0 +1,131 @@
+.log{
+    width:50%;
+    margin: 3rem;
+    margin-left: 25%;
+    background-color: rgb(110, 18, 18);
+}
+.logform{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+    input{
+        display: inline-flex;
+        margin: 1rem;
+        justify-content: center;
+        width: 90%
+    }
+}
+        
+.loginsubmit{
+    text-align: center;
+    justify-content: center;
+    width:100%;
+
+
+}
+.logh2{
+    border: 3px solid rgb(14, 112, 19);
+    background-color: rgb(27, 202, 144);
+    h2{
+        padding: 10%;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        background-color: rgb(0, 17, 255);
+        cursor: pointer;
+    }
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;  
+    
+    
+}
+.logh2 h2:hover{
+    opacity: .4;
+}
+
+
+.hello{
+ 
+    z-index: 1000 ;
+    text-align: right;
+    padding: 2rem;
+    color:rgb(36, 190, 36);
+    position: absolute;
+    // display: block;
+  
+        button{
+            float: left;
+            text-align: left;
+            margin: 0px;
+            width: auto;
+        }
+    
+}
+
+
+.signinup{
+        visibility: hidden;
+        display: none;
+}
+.show{
+        margin: 0rem;
+        padding: 0rem;
+        background-color: rgba(52, 177, 177, 0.658);
+        display: inline-block;
+        position: absolute;
+        left: 0%;
+        top:20%;
+        animation-name: show;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+        input[type=submit]{
+            position: absolute;
+            width: 100%;
+            left: -1%;
+        background-color: rgb(0, 255, 55);
+        }
+       
+    
+    }
+    
+    @keyframes show{
+        100%{
+            opacity: 1;
+            visibility: visible;
+        }
+        0%{
+            opacity: 0;
+        }
+    }
+
+.hide{
+    margin: 0rem;
+    padding: 0rem;
+    background-color: rgba(52, 177, 177, 0.658);
+    display: inline-block;
+    position: absolute;
+    left: 0%;
+    top:20%;
+    input[type=submit]{
+        position: absolute;
+        width: 100%;
+        left: -1%;
+    background-color: rgb(0, 255, 55);
+    }
+    animation-name: hide;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    
+
+}
+
+@keyframes hide{
+    100%{
+        opacity: 0;
+        visibility: hidden;
+    }
+    0%{
+        opacity: 1;
+    }
+}

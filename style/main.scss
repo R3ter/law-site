@@ -1,0 +1,117 @@
+
+html { 
+    font-family:'Times New Roman', Times, serif, Arial;
+    height: 100%; overflow:auto; }
+body { 
+    // height: 90%; 
+    word-break: break-word;
+    white-space: pre-wrap; 
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+    
+}
+
+    .askbutton{
+        border: none;
+        position: absolute;       
+        right:5%;
+        background-color: rgba(153, 10, 10, 0.932);
+        padding: 1rem;
+        margin: 1rem;
+        color :rgb(255, 255, 255);
+        border-radius: 10%;
+        width:auto;
+        font-weight: 300;
+    
+    }
+    .askbutton:hover{
+        background-color: rgba(126, 7, 7, 0.932);
+        color:white;
+        box-shadow: 0px;
+    
+    }
+    .searchbox{
+        width: 100%;
+        color:white;
+        margin-top: 3rem;
+        
+        *{
+            padding:0.5rem;
+            border: none;
+            // border: 1px solid rgb(255, 136, 136);
+            background-color: rgb(65, 7, 7);
+            color:white;
+        }
+        #submit{
+            cursor: pointer;
+        }
+
+        #select{
+            margin-right: 1rem;
+            border:none;
+        }
+        
+    }
+    .questions{
+        text-align: center;
+        
+        .question{
+            box-shadow:-7px 7px 25px 0 rgb(0, 0, 0);
+            transition: .5s;
+            direction: rtl;
+            width:70%;
+            *{
+                margin-left: 2rem;
+                margin-right: 1rem;
+            }
+            display: inline-block;
+            text-align: right;
+            border: none;
+            // padding: 40px;
+            
+            // margin-right:10rem;
+            margin-bottom: 5rem;
+            color: white;
+            background-color: rgba(136, 6, 17, 0.719);
+            // margin-left:10rem;
+            
+            h4{
+                color: rgba(98, 243, 248, 0.829);
+            }
+            
+        }
+        .colom{
+            display: inline-block;
+            width :100%;
+            break-after: column;
+        }
+        .question:hover{
+            box-shadow: 0 0 0 0 rgb(0, 0, 0);
+            transition: .5s;
+        }
+        .arrow{
+            position: initial;
+            transform: translateY(50%);       
+            display: block;
+            // transform: translateX(%);
+            opacity: 0;
+            transition: .5s;
+        }
+        .question:hover .arrow, .question.hover .arrow{
+            opacity: 1;
+            display: block;
+            transform: translateX(-3%);
+            transition: .5s;
+    
+        }
+    }
+.info{
+    text-align: left;
+    margin-left: 2rem;
+    *{
+        display: inline-block;
+        text-align: left;
+    }
+}
