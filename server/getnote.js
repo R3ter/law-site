@@ -60,6 +60,16 @@ socket.on("notes-files",(r)=>{
         const result = Object.keys(elements).map(function(key) {
           return elements[key].outerHTML;
         });
+        if(e.nopages){
+          try{
+            socket.emit('note-was-found',
+            {text:result.join('')
+            .replace(/<script/ig).replace(/<img/ig).replace(/\uFFFD/g,'')
+            .replace(/\u00bf/g,'').replace(/\u00bd/g,'').trim()
+              }
+              )
+          }catch(e){console.log(e)}
+        }else{
           try{
             socket.emit('note-was-found',
             {text:result.slice((e.num-1)*30,e.num*30).join("")
@@ -69,6 +79,7 @@ socket.on("notes-files",(r)=>{
               length:result.length/30}
               )
           }catch(e){console.log(e)}
+        }
         }).catch(()=>{
           socket.emit('note-was-notfound')
         })

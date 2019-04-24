@@ -2,12 +2,15 @@ import React from 'react'
 import io from 'socket.io-client'
 import Pagechangernote from './pagechangernote';
 import getCookie from './getcookie'
+import confirm from './confirm'
 import { hide, show } from './loading';
 const socket=io()
-
+let can=true;
 class Note extends React.Component{
     constructor(e){
         super(e)
+        this.view=this.view.bind(this)
+        this.report=this.report.bind(this)
         if(e.num==undefined||e.num==null){
             e.num=1
         }
@@ -16,8 +19,7 @@ class Note extends React.Component{
         
         socket.on('note-was-notfound',()=>{
             hide()
-            document.getElementById('error-note').innerHTML
-            ="sorry <h2>This file was not found</h2>"
+            this.setState(()=>({error:true}))
         })
 
         socket.emit('addview',e.name)
@@ -27,6 +29,7 @@ class Note extends React.Component{
        
     }
     componentDidMount(){
+
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
         
@@ -34,68 +37,127 @@ class Note extends React.Component{
             hide()
          const  iframe=document.getElementById('doc')
          iframe.contentDocument.open()   
-         iframe.
-            contentDocument.write(((e.text).trim())
+         iframe.contentDocument.write(((e.text).trim())
             .replace(/\uFFFD/g, ''))
         iframe.contentDocument.close()
-            
-            iframe.height = iframe.contentWindow.
-            document.body.scrollHeight + "px";
 
-            document.getElementById('error-note').innerHTML=""
-            
+        iframe.height = iframe.contentWindow.
+        document.body.scrollHeight + "px";
+        console.log(iframe.height)
             this.setState({pages:e.pages,
-                length:e.length})
+                length:e.length,error:false})
         })
         if(getCookie("Username")){
         socket.emit('isliked',{
             name:getCookie("Username"),
             note:this.props.name})
         socket.on('isliked',()=>{
-        document.getElementById('addlike').innerHTML="remove like"
+        document.getElementById('addlike').style.color="green"
+        document.getElementById('addlike').className='like'
         })
         socket.on('isnotliked',()=>{
-        document.getElementById('addlike').innerHTML="add like"
+        document.getElementById('addlike').className='like2'
+        document.getElementById('addlike').style.color="gray"
         })}
     }
     componentWillReceiveProps(e){
+       
         show()
         document.body.scrollTop = document.documentElement.scrollTop = 0;
         socket.emit('find-note',{name:e.name,num:e.num})
         
     }
     like(e){
-        e.target.innerHTML="loading"
+        if(can){
         socket.emit('addlike',{
             note:this.props.name,
             name:getCookie("Username")
             ,ider:getCookie("id"),
             pass:getCookie("pass")})
-        socket.on('deletelike',()=>{
-        document.getElementById('addlike').innerHTML="add like"            
-        })
-        socket.on('addlike',()=>{
-        document.getElementById('addlike').innerHTML="delete like"
+            if(e.target.style.color=="green"){
+                e.target.className="like2"
+                e.target.style.color='darkgray'
+            }else{
+                e.target.className="like"
+                e.target.style.color='green'
+                setTimeout(()=>{
+                    can=true
+                },1000)
+                can=false
+            }
+            
+        }
+
+        // socket.on('deletelike',()=>{
+        // })
+        // socket.on('addlike',()=>{
+        // })
+        // e.target.className='loadingicon'
+    }
+    report(){
+        confirm('Do you want to report this?','',()=>{
+            socket.emit('report',{type:'note',
+            link:window.location.pathname,
+            name:getCookie('Username')?getCookie('Username'):
+            localStorage.getItem('key')})
         })
     }
+    view(e){
+        document.getElementById('doc').height = '1242px'
+        show()
+        if(e.target.value!='عدة صفحات'){
+        socket.emit('find-note',{name:this.props.name,nopages:true})
+        }else{
+        socket.emit('find-note',{name:this.props.name,num:this.props.num})
+        }
+        
+    }
     render(){
+
         return(
             <div>
-            <div>
+            <div style={{display: 'flex',
+             justifyContent:'space-around'}}>
                  {
-                 getCookie("Username")?
-                 <button onClick={this.like} 
-                  id='addlike'>loading</button>
+                 getCookie("Username")&&!this.state.error?
+            
+                 <h1 onClick={this.like} 
+                  id='addlike' style={{fontSize:'4rem'
+                  ,cursor:'pointer'}}
+                  >♥</h1>
                  :""
                  }
             </div>
-            <div className='law'>
-            <iframe id='doc' style={{width:"90%",
+            {!this.state.error?
+            <div>
+            <h1 style={{color:'white',
+            textAlign:'center'}}>{this.props.name}</h1>
+            <div className='law'style={{width:"90%",borderColor:'rgb(202, 5, 5)',
+            borderWidth:'8px',borderStyle:'solid',position:'relative'}}>
+            <div style={{direction:'rtl'}}>
+            <div style={{color:'white',cursor:'pointer'
+            ,position:"absolute",left:'2rem',top:'-1rem'}}
+            onClick={this.report}>
+            <h1 >🏴</h1>
+            <p>تقديم بلاغ</p>
+            </div>
+            <p style={{color:'white',padding:'1rem',display:'inline-block'
+            }} >طريقة العرض:</p>
+            <select onChange={this.view}
+             style={{display:'inline-block'}}>
+            <option >عدة صفحات</option>
+            <option >صفحة واحدة</option>
+            </select>
+            </div>
+            <iframe id='doc' style={{width:'100%',
             backgroundColor:"white"}}/>
-           
-            <h1 style={{textAlign:"center",color:"red"}} id="error-note">
-
+            </div>
+            </div>
+            :
+            <h1 style={{textAlign:"center",color:"red"}}>
+             File was not found
             </h1>
+            }
             {
                 this.state.pages?
             <Pagechangernote page={(this.props.num)}
@@ -103,7 +165,7 @@ class Note extends React.Component{
                      link={'/note&'+this.props.name+'&'}  />:''
             }
             </div>
-            </div>
+            // </div>
             )
     }
 }

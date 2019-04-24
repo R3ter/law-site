@@ -158,12 +158,13 @@ class QuestionPage extends React.Component{
                 window.location.href='./sign'
                 hide()
             })
-            socket.on("addcomment",(e)=>{
+            socket.on("addcomment",(ee)=>{
                 socket.emit("getcomments",this.props.id)
                 socket.on("getcomments",(e)=>{
                     this.setState(()=>{
                         return({answers:e})},()=>{
                         hide()
+                window.location.href=window.location.href+'#'+ee._id
                 document.getElementById('showcomment').style.display
                 ='inline-block'
                 const text=document.getElementById('input-comment')
@@ -174,22 +175,19 @@ class QuestionPage extends React.Component{
             })
     }
 
-    link(){
-        document.execCommand('insertText', true, '[/رابط/'+
-        (window.getSelection().toString()?window.getSelection().toString()
-        :'النص')+']'+'[/نص/'+'اضف الرابط هنا'+']');
-        console.log(hightext)
-    }
+
  
     addcomment(e){
         e.preventDefault()
-        show()
-       
-       
+        if(e.target.text.value.trim().length>10){
+            show()
             socket.emit('addcomment',
             {text:e.target.text.value,name:getCookie('Username')
             ,id:this.props.id,ider:getCookie('id'),
             pass:getCookie('pass')})
+        }else{
+            info('error','your answer is too short')
+        }
         
     }
     seemore(){
@@ -322,11 +320,10 @@ class QuestionPage extends React.Component{
                 onClick={()=>{
                     Confirm('Do you want to report this ?','',
                     ()=>{
-                    socket.emit('reportquestion',{
-                                questionid:this.props.id,
-                                username:getCookie("Username")?
-                                getCookie("Username"):
-                                localStorage.getItem('key')})
+                        socket.emit('report',{type:'note',
+                            link:window.location.pathname,
+                            name:getCookie('Username')?getCookie('Username'):
+                            localStorage.getItem('key')})
                                 info('info',
                                 'this question has been reported')
                                 })
@@ -344,11 +341,12 @@ class QuestionPage extends React.Component{
                 height:'0px'}} id='input-comment' >
                 <form 
                   onSubmit={this.addcomment}>
-                <p style={{userSelect:'none',cursor:'pointer'}}
-                onClick={this.link}
-                >link</p>
+               
                 <textarea maxlength="19066" id='textarea' 
-                 name='text' style={{width:'80%',direction:'rtl'}} type='text'/>
+                 name='text' 
+                 style={{width:'80%',direction:'rtl',paddingRight:'1rem',
+                 lineHeight:'1.3rem',paddingLeft:'1rem'}}
+                  type='text'/>
                 <br/>
                 <input type='submit' style={{width:'80%',
                 backgroundColor:'darkred',cursor:'pointer',
@@ -463,12 +461,10 @@ class QuestionPage extends React.Component{
                         ,cursor:'pointer'}}
                         title='ابلاغ'
                         onClick={()=>{
-                                socket.emit('reportcomment',{
-                                id:e._id,
-                                questionid:e.id,
-                                username:getCookie("Username")?
-                                getCookie("Username"):
-                                localStorage.getItem('key')})
+                            socket.emit('report',{type:'note',
+                            link:window.location.pathname+"#"+e._id,
+                            name:getCookie('Username')?getCookie('Username'):
+                            localStorage.getItem('key')})
                                 info('info','Reported',
                                 'we will review this answer and take the right action')
                         }}

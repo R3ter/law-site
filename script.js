@@ -96,13 +96,9 @@ var _sign = require('./parts/sign');
 
 var _sign2 = _interopRequireDefault(_sign);
 
-var _reportscomments = require('./parts/reportscomments');
+var _reports = require('./parts/reports');
 
-var _reportscomments2 = _interopRequireDefault(_reportscomments);
-
-var _reportsquestions = require('./parts/reportsquestions');
-
-var _reportsquestions2 = _interopRequireDefault(_reportsquestions);
+var _reports2 = _interopRequireDefault(_reports);
 
 var _loading = require('./parts/loading');
 
@@ -168,10 +164,8 @@ var Main = function (_React$Component) {
                             path: '/question:id', exact: true }),
                         _react2.default.createElement(_reactRouterDom.Route, { component: ask,
                             path: '/ask', exact: true }),
-                        _react2.default.createElement(_reactRouterDom.Route, { component: _reportscomments2.default,
-                            path: '/reportrater*^$comments', exact: true }),
-                        _react2.default.createElement(_reactRouterDom.Route, { component: _reportsquestions2.default,
-                            path: '/reportrater*^$questions', exact: true }),
+                        _react2.default.createElement(_reactRouterDom.Route, { component: _reports2.default,
+                            path: '/reportrater*^$', exact: true }),
                         _react2.default.createElement(_reactRouterDom.Route, { component: log,
                             path: '/sign', exact: true }),
                         _react2.default.createElement(_reactRouterDom.Route, { component: function component() {

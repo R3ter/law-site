@@ -29,6 +29,32 @@ h2{
     
     
 }
+}
 
-
+.like2{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.like{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: green;
+    animation-name: like;
+    animation-duration: 1s;
+}
+@keyframes like {
+    0%{
+        transform: rotate(0)
+    }
+    100%{
+        transform: rotate(360deg);
+    }
 }

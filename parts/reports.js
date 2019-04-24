@@ -9,11 +9,11 @@ class Reports extends React.Component{
     constructor(e){
         super(e)
         this.state={array:[]}
-        socket.emit('getreportsquestions',{
+        socket.emit('getreports',{
                     name:getCookie('Username')
                     ,ider:getCookie('id'),
                     pass:getCookie('pass')})
-        socket.on('getreportsquestions',(e)=>{
+        socket.on('getreports',(e)=>{
             this.setState(()=>{
                 return {array:e}
             })
@@ -28,15 +28,15 @@ return(
             backgroundColor:'red'}} key={index}>
             <Link style={{color:'rgb(49, 226, 250)',
                 textDecoration: 'none'}}
-                 to={'question'+e.questionid}>
-            <h1>{e.questionid}</h1>
+                 to={e.link}>
+            <h1>{e.link}</h1>
             </Link>
             <h1 style={{textAlign:'center'}}
              >{e.names.length}</h1>
              <h2 style={{cursor:'pointer'}}
               onClick={()=>{
                   Confirm('are u sure','are u sure',()=>{
-                 socket.emit('deletereportquestion',
+                 socket.emit('deletereport',
                  {id:e._id,
                     name:getCookie('Username')
                     ,ider:getCookie('id'),

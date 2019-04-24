@@ -4,7 +4,7 @@ const time=require('../time')
 
 function succ(props,data,socket){
 let id
-if(!props.text&&!typeof (props.text)=='string'){
+if(!props.text&&!typeof (props.text)=='string'||props.text.trim().length<10){
   return
 }
 try{
@@ -35,14 +35,15 @@ data.db().collection('newshit').findOne({_id:id},
                     likesnames:[],
                     dislikesnames:[]
                 }),(error,r)=>{
-                  if(r)
-                  socket.emit('addcomment',r.ops[0])
+                  if(r){
+                    socket.emit('addcomment',r.ops[0])
+                  }
                 }
                 )}
-              catch(e){}
+              catch(e){console.log(e)}
               }
     })              
-    }
+    }else{console.log('question was not found')}
 })
 }
 

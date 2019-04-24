@@ -28,8 +28,7 @@ import Ask from './parts/ask'
 import Addnote from './parts/addnote'
 import Profile from './parts/profile'
 import Sign from './parts/sign'
-import Reportscomments from './parts/reportscomments'
-import Reportsquestions from './parts/reportsquestions'
+import Reports from './parts/reports'
 import {hide} from './parts/loading'
 import io from 'socket.io-client'
 import uniqid from 'uniqid'
@@ -72,10 +71,8 @@ class Main extends React.Component{
             <Route component={ask} 
             path="/ask" exact />
             
-            <Route component={Reportscomments} 
-            path="/reportrater*^$comments" exact />
-            <Route component={Reportsquestions} 
-            path="/reportrater*^$questions" exact />
+            <Route component={Reports} 
+            path="/reportrater*^$" exact />
 
             <Route component={log} 
             path="/sign" exact />

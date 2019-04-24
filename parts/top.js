@@ -63,11 +63,8 @@ class Top extends React.Component{
         ,right:'1rem'
         ,top:'0rem'}}>
         <br/> 
-        <Link to="/reportrater*%5E$comments">
-        <button style={{width:'auto'}}>reported comments</button>
-        </Link>
-        <Link  to="/reportrater*%5E$questions">
-        <button style={{width:'auto'}}>reported questions</button>
+        <Link  to="/reportrater*%5E$">
+        <button style={{width:'auto'}}>reportes</button>
         </Link>
         </div>:''}
         </div>

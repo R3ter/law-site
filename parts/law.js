@@ -26,8 +26,26 @@ class Laws extends React.Component{
             window.scrollTo(0,0)
         })
     }
+    search(e){
+        e.preventDefault()
+        if(e.target.text.value.trim())
+        socket.emit('getlaws',e.target.text.value)
+    }
+    clear(e){
+        if(e.target.value){
+            return
+        }
+        socket.emit('getlaws')
+    }
     render(){
         return(<div>
+        <div className="formsearchbox">
+        <form onSubmit={this.search} >
+        بحث:
+            <input name='text' onChange={this.clear} />
+            <input type='submit' name='submit' value="بحث"/>
+        </form>
+        </div>
         {this.state.laws.slice((this.state.slice-1)*10
                     ,(this.state.slice)*10).map((e,index)=>{
             return (<div style={{

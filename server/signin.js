@@ -47,7 +47,7 @@ data.db().collection("accounts").findOne({username:e.username},
                       username:e.username
                   },{$set:{last:time()}})
 
-                      console.log(e.username+'has logged in again')
+                      console.log(e.username+' has logged in again')
 
                       socket.emit('loggedin',
                       {id:result.ops[0]._id,

@@ -32,6 +32,30 @@ body {
         box-shadow: 0px;
     
     }
+    .formsearchbox{
+        width: 100%;
+        color:white;
+        margin-top: 3rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        direction: rtl;
+        :first-child{
+            margin-right: 4rem;
+            input{
+                padding:0.5rem;
+                border: none;
+                border-width: .1px;
+                border-color: rgb(92, 16, 16);
+                border-style: solid;
+                background-color: rgb(65, 7, 7);
+                color:white;
+            }
+        }
+        input[type='submit']{
+            cursor: pointer;
+        }
+        
+    }
     .searchbox{
         width: 100%;
         color:white;

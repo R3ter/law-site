@@ -46,11 +46,18 @@ mongoconnect((data)=>{
 
 socket.on('connect',(socket)=>{
   // console.log("connected")
-  socket.on('getlaws',()=>{
+  socket.on('getlaws',(e)=>{
     try{
       file.readdir(path.join(__dirname,'files'),(error,array)=>{
-        if(!error)
-        socket.emit('getlaws',array)
+        if(!error){
+          if(e){
+            socket.emit('getlaws',array.filter((a)=>{
+              return(a.includes(e))
+            }))
+          }else{
+            socket.emit('getlaws',array)
+          }
+        }
       })
     }
     catch(e){console.log(e)}
@@ -107,43 +114,36 @@ socket.on('connect',(socket)=>{
 })
 
 
-socket.on('reportcomment',(e)=>{
-data.db().collection('reportedcomments').findOne({
-  commentid:e.id,questionid:e.questionid
+socket.on('report',(e)=>{
+data.db().collection('report').findOne({
+  link:e.link
 },(error,result)=>{
   if(result&&!error){
-    if(!result.names.includes(e.username)){
-      data.db().collection('reportedcomments').updateOne({
-    commentid:e.id,questionid:e.questionid
-      },{$set:{names:result.names.concat(e.username)}})
+    if(!result.names.includes(e.name)){
+      data.db().collection('report').updateOne({
+    link:e.link
+      },{$set:{names:result.names.concat(e.name)}})
     }
   }else if(!result){
-    data.db().collection('reportedcomments').insertOne({
-      commentid:e.id,questionid:e.questionid,names:[e.username]
+    data.db().collection('report').insertOne({
+      link:e.link,names:[e.name]
     })
   }
 })
 })
-socket.on('getreportscomments',(e)=>{
+
+socket.on('getreports',(e)=>{
   if(e.name=='adminwaleedisadmin')
   islogged(e,data,()=>{
-    data.db().collection('reportedcomments').find().toArray((error,result)=>{
-      socket.emit('getreportscomments',result)
+    data.db().collection('report').find().toArray((error,result)=>{
+      socket.emit('getreports',result)
     })
   },socket)  
 })
-socket.on('getreportsquestions',(e)=>{
-  if(e.name=='adminwaleedisadmin')
-  islogged(e,data,()=>{
-    data.db().collection('reportedquestions').find().toArray((error,result)=>{
-      socket.emit('getreportsquestions',result)
-    })
-  },socket)  
-})
-socket.on('deletereportquestion',(e)=>{
+socket.on('deletereport',(e)=>{
   if(e.name=='adminwaleedisadmin'){
     islogged(e,data,()=>{
-      data.db().collection('reportedquestions').deleteOne({
+      data.db().collection('report').deleteOne({
         _id:ObjectID(e.id)
       })
     },socket)
