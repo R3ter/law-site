@@ -7,7 +7,8 @@ data.db().collection("chat").find().toArray((error,r)=>{
     }else if(r){
         socket.emit("getmessages",{
             messages:r.filter((r)=>{
-               return r.user==e.name|r.user2==e.name
+                if(r.user==e.name|r.user2==e.name)
+               return r
             })
         })
     }

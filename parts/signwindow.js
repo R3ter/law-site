@@ -15,6 +15,7 @@ class Panel extends React.Component{
         
         
         this.hide=this.hide.bind(this)
+        // this.update=this.update.bind(this)
         this.signout=this.signout.bind(this)
         this.signin=this.signin.bind(this)
         const loginid=getCookie("id");
@@ -25,7 +26,13 @@ class Panel extends React.Component{
         }
         
     }
-    
+    // update(){
+    //     const loginid=getCookie("id");
+    //     const username=getCookie("Username");
+    //     this.setState(()=>({login:false,name:username}))
+    //     if(loginid==null||loginid==""||loginid==undefined){
+    //     this.setState(()=>({login:true,name:username}))}
+    // }
     signout(e){
         e.preventDefault()
         socket.emit("signout",{
@@ -78,8 +85,9 @@ class Panel extends React.Component{
             'expires=Thu, 18 Dec 2025 12:00:00 UTC' 
             document.cookie="ider="+e.ider+";"+
             'expires=Thu, 18 Dec 2025 12:00:00 UTC' 
-               
-                window.location.reload(false)
+            window.location.reload(false)
+             
+                // this.update()
                 
             })
             socket.on("wrongpass",()=>{

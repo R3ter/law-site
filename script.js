@@ -1,250 +1,267 @@
-'use strict';
+"use strict";
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+require("./style/style.scss");
 
-require('./style/style.scss');
+require("./style/ask.scss");
 
-require('./style/ask.scss');
+require("./style/main.scss");
 
-require('./style/main.scss');
+require("./style/side.scss");
 
-require('./style/side.scss');
+require("./style/foot.scss");
 
-require('./style/questionpage.scss');
+require("./style/questionpage.scss");
 
-require('./style/pageSelector.scss');
+require("./style/iframe.scss");
 
-require('./style/confirm.scss');
+require("./style/pageSelector.scss");
 
-require('./style/addnote.scss');
+require("./style/confirm.scss");
 
-require('./style/sign.scss');
+require("./style/addnote.scss");
 
-require('./style/notes.scss');
+require("./style/sign.scss");
 
-require('./style/profile.scss');
+require("./style/notes.scss");
 
-require('./style/law.scss');
+require("./style/profile.scss");
 
-var _react = require('react');
+require("./style/law.scss");
 
-var _react2 = _interopRequireDefault(_react);
+var _react = _interopRequireDefault(require("react"));
 
-var _reactDom = require('react-dom');
+var _reactDom = _interopRequireDefault(require("react-dom"));
 
-var _reactDom2 = _interopRequireDefault(_reactDom);
+var _top = _interopRequireDefault(require("./parts/top"));
 
-var _top = require('./parts/top');
+var _reactRouterDom = require("react-router-dom");
 
-var _top2 = _interopRequireDefault(_top);
+var _question = _interopRequireDefault(require("./parts/question"));
 
-var _reactRouterDom = require('react-router-dom');
+var _questionpage2 = _interopRequireDefault(require("./parts/questionpage"));
 
-var _question = require('./parts/question');
+var _side2 = _interopRequireDefault(require("./parts/side"));
 
-var _question2 = _interopRequireDefault(_question);
+var _notes2 = _interopRequireDefault(require("./parts/notes"));
 
-var _questionpage = require('./parts/questionpage');
+var _message = _interopRequireDefault(require("./parts/message"));
 
-var _questionpage2 = _interopRequireDefault(_questionpage);
+var _chat = _interopRequireDefault(require("./parts/chat"));
 
-var _side = require('./parts/side');
+var _law2 = _interopRequireDefault(require("./parts/law"));
 
-var _side2 = _interopRequireDefault(_side);
+var _sendmessage = _interopRequireDefault(require("./parts/sendmessage"));
 
-var _notes = require('./parts/notes');
+var _note = _interopRequireDefault(require("./parts/note"));
 
-var _notes2 = _interopRequireDefault(_notes);
+var _noteInfo = _interopRequireDefault(require("./parts/note-info"));
 
-var _message = require('./parts/message');
+var _lawpage = _interopRequireDefault(require("./parts/lawpage"));
 
-var _message2 = _interopRequireDefault(_message);
+var _ask2 = _interopRequireDefault(require("./parts/ask"));
 
-var _law = require('./parts/law');
+var _addnote2 = _interopRequireDefault(require("./parts/addnote"));
 
-var _law2 = _interopRequireDefault(_law);
+var _profile2 = _interopRequireDefault(require("./parts/profile"));
 
-var _sendmessage = require('./parts/sendmessage');
+var _reports = _interopRequireDefault(require("./parts/reports"));
 
-var _sendmessage2 = _interopRequireDefault(_sendmessage);
+var _loading = require("./parts/loading");
 
-var _note = require('./parts/note');
+var _socket = _interopRequireDefault(require("socket.io-client"));
 
-var _note2 = _interopRequireDefault(_note);
+var _uniqid = _interopRequireDefault(require("uniqid"));
 
-var _noteInfo = require('./parts/note-info');
+var _sign2 = _interopRequireDefault(require("./parts/sign"));
 
-var _noteInfo2 = _interopRequireDefault(_noteInfo);
+var _foot2 = _interopRequireDefault(require("./parts/foot"));
 
-var _lawpage = require('./parts/lawpage');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _lawpage2 = _interopRequireDefault(_lawpage);
-
-var _ask = require('./parts/ask');
-
-var _ask2 = _interopRequireDefault(_ask);
-
-var _addnote = require('./parts/addnote');
-
-var _addnote2 = _interopRequireDefault(_addnote);
-
-var _profile = require('./parts/profile');
-
-var _profile2 = _interopRequireDefault(_profile);
-
-var _sign = require('./parts/sign');
-
-var _sign2 = _interopRequireDefault(_sign);
-
-var _reports = require('./parts/reports');
-
-var _reports2 = _interopRequireDefault(_reports);
-
-var _loading = require('./parts/loading');
-
-var _socket = require('socket.io-client');
-
-var _socket2 = _interopRequireDefault(_socket);
-
-var _uniqid = require('uniqid');
-
-var _uniqid2 = _interopRequireDefault(_uniqid);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var socket = (0, _socket2.default)();
-socket.connect('localhost:3000');
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+// const socket=io()
+// socket.connect('localhost:3000')
 var ask = function ask() {
-    return _react2.default.createElement(_ask2.default, null);
-};
-var log = function log() {
-    return _react2.default.createElement(_sign2.default, null);
+  return _react["default"].createElement(_ask2["default"], null);
 };
 
-var Main = function (_React$Component) {
-    _inherits(Main, _React$Component);
+var Main =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Main, _React$Component);
 
-    function Main(e) {
-        _classCallCheck(this, Main);
+  function Main(e) {
+    var _this;
 
-        var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, e));
+    _classCallCheck(this, Main);
 
-        if (!localStorage.getItem('key')) {
-            localStorage.setItem('key', (0, _uniqid2.default)());
-        }
-        return _this;
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Main).call(this, e));
+
+    if (!localStorage.getItem('key')) {
+      localStorage.setItem('key', (0, _uniqid["default"])());
     }
 
-    _createClass(Main, [{
-        key: 'render',
-        value: function render() {
+    _this.update = _this.update.bind(_assertThisInitialized(_this));
+    return _this;
+  }
 
-            return _react2.default.createElement(
-                _reactRouterDom.BrowserRouter,
-                null,
-                _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(_top2.default, null),
-                    _react2.default.createElement(_side2.default, null),
-                    _react2.default.createElement(
-                        _reactRouterDom.Switch,
-                        null,
-                        _react2.default.createElement(_reactRouterDom.Route, { component: function component(e) {
-                                // document.body.scrollTop =
-                                // document.documentElement.scrollTop = 0;
-                                return _react2.default.createElement(_questionpage2.default, { id: e.match.params.id });
-                            },
-                            path: '/question:id', exact: true }),
-                        _react2.default.createElement(_reactRouterDom.Route, { component: ask,
-                            path: '/ask', exact: true }),
-                        _react2.default.createElement(_reactRouterDom.Route, { component: _reports2.default,
-                            path: '/reportrater*^$', exact: true }),
-                        _react2.default.createElement(_reactRouterDom.Route, { component: log,
-                            path: '/sign', exact: true }),
-                        _react2.default.createElement(_reactRouterDom.Route, { component: function component() {
-                                return _react2.default.createElement(_addnote2.default, null);
-                            },
-                            path: '/addnote', exact: true }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/profile:id', component: function component(e) {
-                                // document.body.scrollTop =
-                                // document.documentElement.scrollTop = 0;
-                                return _react2.default.createElement(_profile2.default, { name: e.match.params.id });
-                            }, exact: true }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/Q&a:page', component: function component(e) {
-                                document.body.scrollTop = document.documentElement.scrollTop = 0;
-                                return _react2.default.createElement(_question2.default, { page: e.match.params.page });
-                            }, exact: true }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/notes&:page', component: function component(e) {
-                                return _react2.default.createElement(_notes2.default, { page: e.match.params.page });
-                            } }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/note-info:id', component: function component(e) {
-                                return _react2.default.createElement(_noteInfo2.default, { id: e.match.params.id });
-                            } }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/Laws&:id', component: function component(e) {
-                                return _react2.default.createElement(_law2.default, { id: e.match.params.id });
-                            } }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/messages', component: function component() {
-                                return _react2.default.createElement(_message2.default, null);
-                            } }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/sendmessage$:id', component: function component(e) {
-                                return _react2.default.createElement(_sendmessage2.default, { id: e.match.params.id });
-                            } }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/note&:id&:num', component: function component(e) {
-                                document.body.scrollTop = document.documentElement.scrollTop = 474;
-                                return _react2.default.createElement(_note2.default, { name: e.match.params.id,
-                                    num: e.match.params.num
-                                });
-                            } }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/Law:id&:page', component: function component(e) {
-                                document.body.scrollTop = document.documentElement.scrollTop = 400;
-                                return _react2.default.createElement(_lawpage2.default, { name: e.match.params.id,
-                                    page: e.match.params.page });
-                            }, exact: true }),
-                        _react2.default.createElement(_reactRouterDom.Route, { component: function component() {
-                                return _react2.default.createElement(
-                                    'div',
-                                    null,
-                                    _react2.default.createElement(
-                                        'h1',
-                                        { style: {
-                                                textAlign: 'center',
-                                                color: 'red'
+  _createClass(Main, [{
+    key: "update",
+    value: function update() {
+      this.forceUpdate();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
 
-                                            } },
-                                        '404 Error page was not found'
-                                    ),
-                                    _react2.default.createElement(
-                                        'h2',
-                                        { style: {
-                                                textDecoration: "none",
-                                                textAlign: 'center'
-                                            } },
-                                        ' ',
-                                        _react2.default.createElement(
-                                            _reactRouterDom.Link,
-                                            {
-                                                style: { color: 'rgb(49, 226, 250)',
-                                                    textDecoration: 'none' }, to: '/' },
-                                            'back to main page'
-                                        )
-                                    )
-                                );
-                            } })
-                    )
-                )
-            );
+      return _react["default"].createElement(_reactRouterDom.BrowserRouter, null, _react["default"].createElement("div", null, _react["default"].createElement(_top["default"], null), _react["default"].createElement(_side2["default"], null), _react["default"].createElement(_reactRouterDom.Switch, null, _react["default"].createElement(_reactRouterDom.Route, {
+        component: function component(e) {
+          // document.body.scrollTop =
+          // document.documentElement.scrollTop = 0;
+          return _react["default"].createElement(_questionpage2["default"], {
+            id: e.match.params.id
+          });
+        },
+        path: "/question:id",
+        exact: true
+      }), _react["default"].createElement(_reactRouterDom.Route, {
+        component: ask,
+        path: "/ask",
+        exact: true
+      }), _react["default"].createElement(_reactRouterDom.Route, {
+        component: _reports["default"],
+        path: "/reportrater*^$",
+        exact: true
+      }), _react["default"].createElement(_reactRouterDom.Route, {
+        component: function component() {
+          return _react["default"].createElement(_sign2["default"], {
+            update: _this2.update
+          });
+        },
+        path: "/sign",
+        exact: true
+      }), _react["default"].createElement(_reactRouterDom.Route, {
+        component: function component() {
+          return _react["default"].createElement(_addnote2["default"], null);
+        },
+        path: "/addnote",
+        exact: true
+      }), _react["default"].createElement(_reactRouterDom.Route, {
+        path: "/profile:id",
+        component: function component(e) {
+          // document.body.scrollTop =
+          // document.documentElement.scrollTop = 0;
+          return _react["default"].createElement(_profile2["default"], {
+            name: e.match.params.id
+          });
+        },
+        exact: true
+      }), _react["default"].createElement(_reactRouterDom.Route, {
+        path: "/Q&a:page",
+        component: function component(e) {
+          document.body.scrollTop = document.documentElement.scrollTop = 0;
+          return _react["default"].createElement(_question["default"], {
+            page: e.match.params.page
+          });
+        },
+        exact: true
+      }), _react["default"].createElement(_reactRouterDom.Route, {
+        path: "/notes&:page",
+        component: function component(e) {
+          return _react["default"].createElement(_notes2["default"], {
+            page: e.match.params.page
+          });
         }
-    }]);
+      }), _react["default"].createElement(_reactRouterDom.Route, {
+        path: "/note-info:id",
+        component: function component(e) {
+          return _react["default"].createElement(_noteInfo["default"], {
+            id: e.match.params.id
+          });
+        }
+      }), _react["default"].createElement(_reactRouterDom.Route, {
+        path: "/Laws&:id",
+        component: function component(e) {
+          return _react["default"].createElement(_law2["default"], {
+            id: e.match.params.id
+          });
+        }
+      }), _react["default"].createElement(_reactRouterDom.Route, {
+        path: "/messages",
+        component: function component() {
+          return _react["default"].createElement(_chat["default"], null);
+        }
+      }), _react["default"].createElement(_reactRouterDom.Route, {
+        path: "/sendmessage$:id",
+        component: function component(e) {
+          return _react["default"].createElement(_sendmessage["default"], {
+            id: e.match.params.id
+          });
+        }
+      }), _react["default"].createElement(_reactRouterDom.Route, {
+        path: "/note&:id&:num",
+        component: function component(e) {
+          document.body.scrollTop = document.documentElement.scrollTop = 474;
+          return _react["default"].createElement(_note["default"], {
+            name: e.match.params.id,
+            num: e.match.params.num
+          });
+        }
+      }), _react["default"].createElement(_reactRouterDom.Route, {
+        path: "/Law:id&:page",
+        component: function component(e) {
+          document.body.scrollTop = document.documentElement.scrollTop = 400;
+          return _react["default"].createElement(_lawpage["default"], {
+            name: e.match.params.id,
+            page: e.match.params.page
+          });
+        },
+        exact: true
+      }), _react["default"].createElement(_reactRouterDom.Route, {
+        component: function component() {
+          return _react["default"].createElement("div", null, _react["default"].createElement("h1", {
+            style: {
+              textAlign: 'center',
+              color: 'red'
+            }
+          }, "404 Error page was not found"), _react["default"].createElement("h2", {
+            style: {
+              textDecoration: "none",
+              textAlign: 'center'
+            }
+          }, " ", _react["default"].createElement(_reactRouterDom.Link, {
+            style: {
+              color: 'rgb(49, 226, 250)',
+              textDecoration: 'none'
+            },
+            to: "/"
+          }, "back to main page")));
+        }
+      })), _react["default"].createElement(_foot2["default"], null)));
+    }
+  }]);
 
-    return Main;
-}(_react2.default.Component);
+  return Main;
+}(_react["default"].Component);
 
-_reactDom2.default.render(_react2.default.createElement(Main, null), document.getElementById("id"));
+_reactDom["default"].render(_react["default"].createElement(Main, null), document.getElementById("id"));
+
 (0, _loading.hide)();

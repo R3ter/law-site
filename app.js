@@ -8,6 +8,7 @@ const file=require('fs')
 const profileinfo=require('./server/profileinfo')
 const signin=require('./server/signin')
 const signup=require('./server/sginup')
+const removenote=require('./server/removenote')
 const addnote=require('./server/uploadnote')
 const getmessages=require('./server/getmessages')
 const getchat=require('./server/getchat')
@@ -41,7 +42,7 @@ app.get('*',(req,res)=>{
     res.sendFile(path.join(__dirname,"public",'index.html'))
   });
 mongoconnect((data)=>{
-  server.listen(3000,"10.0.0.60");
+  server.listen(process.env.PORT||3000);
 
 
 socket.on('connect',(socket)=>{
@@ -90,6 +91,13 @@ socket.on('connect',(socket)=>{
       gethours:date.getHours(),
       getmins:date.getMinutes()
     })
+  })
+
+
+  socket.on("removenote",(e)=>{
+    if(e.name=='adminwaleedisadmin'){
+      islogged(e,data,removenote,socket)
+    }
   })
 
   socket.on('addview',(e)=>{
@@ -241,9 +249,9 @@ socket.on("getaccounts",(e)=>{
 socket.on("getmessages",(e)=>{
   islogged(e,data,getmessages,socket)
 })
-socket.on("getchat",(e)=>{
-  islogged(e,data,getchat,socket)
-})
+// socket.on("getchat",(e)=>{
+//   islogged(e,data,getchat,socket)
+// })
 socket.on("addquestion",(e)=>{
   islogged(e,data,ask,socket)
 })

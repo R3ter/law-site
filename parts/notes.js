@@ -153,7 +153,7 @@ class Notes extends React.Component{
                 <div className='info-notes' >
                       <p>{Currenttime(this.state.time,e.time)}</p>
                     <p 
-                     >likes: {e.likes}</p>
+                     >{e.likes} : ❤</p>
                     <p 
                      >views: {e.views}</p>
                 

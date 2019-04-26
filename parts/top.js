@@ -43,20 +43,20 @@ class Top extends React.Component{
         </Link>
          <Link 
                 style={{color:'rgb(49, 226, 250)',
-                textDecoration: 'none'}} to="/laws&1">
-        <button>laws</button>
-        </Link>
-         <Link 
-                style={{color:'rgb(49, 226, 250)',
                 textDecoration: 'none'}} to="/Q&a1">
         <button>Q&A</button>
         </Link>
          <Link 
                 style={{color:'rgb(49, 226, 250)',
+                textDecoration: 'none'}} to="/laws&1">
+        <button>laws</button>
+        </Link>
+         {/* <Link 
+                style={{color:'rgb(49, 226, 250)',
                 textDecoration: 'none'}} to="/messages">
         <button>chat</button>
         </Link>
-        <button>edary</button>
+        <button>edary</button> */}
         {getCookie('ider')=='5cb9b96c02d8571774e83f1c'?
         <div 
         style={{position:'absolute'

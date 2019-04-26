@@ -1,32 +1,39 @@
 {
   "dependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "7",
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-loader": "^8.0.0-beta.6",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "babel-upgrade": "^1.0.1",
     "body-parser": "^1.18.3",
-    "css-loader": "0.28.4",
+    "css-loader": "^2.1.1",
+    "docx2html": "^1.1.0",
     "express": "^4.16.4",
     "file-loader": "^3.0.1",
     "git": "^0.1.5",
     "image-type": "^4.1.0",
-    "jsdom": "^14.0.0",
-    "mongodb": "^3.1.13",
+    "jsdom": "^15.0.0",
+    "mammoth": "^1.4.8",
+    "mongodb": "^3.2.3",
     "node-sass": "^4.11.0",
-    "react": "^16.8.1",
-    "react-dom": "^16.8.1",
-    "react-router": "3",
-    "react-router-dom": "^4.3.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
     "rect": "^1.2.1",
     "sass-loader": "^7.1.0",
     "socket.io": "^2.2.0",
-    "style-loader": "0.18.2",
+    "style-loader": "^0.23.1",
     "uniqid": "^5.0.3",
-    "webpack": "^4.29.6"
+    "webpack": "^4.30.0"
   },
   "scripts": {
     "waleed": "webpack --watch --mode development",
-    "build-react": "babel ./parts/main-react.js --out-file=script.js --presets=env,react --watch"
+    "build-react": "babel ./parts/main-react.js --out-file=script.js --presets=@babel/preset-env,@babel/preset-react --watch"
   },
   "devDependencies": {
     "webpack-cli": "^3.2.3"

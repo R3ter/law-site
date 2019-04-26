@@ -3,6 +3,7 @@ import io from 'socket.io-client'
 import Pagechangernote from './pagechangernote';
 import getCookie from './getcookie'
 import confirm from './confirm'
+import info from './info'
 import { hide, show } from './loading';
 const socket=io()
 let can=true;
@@ -22,31 +23,37 @@ class Note extends React.Component{
             this.setState(()=>({error:true}))
         })
 
-        socket.emit('addview',e.name)
         this.like=this.like.bind(this)
         socket.emit('find-note',{name:e.name,num:e.num})
        show()
-       
+       socket.on('note-was-found',(e)=>{
+        hide()
+     const  iframe=document.getElementById('doc')
+     let text=''
+     e.text.map((e)=>{
+         text=text+e
+     })
+     iframe.contentDocument.open()   
+     iframe.contentDocument.write('<html dir="rtl">'+
+     (text)+'</html>')
+     iframe.contentDocument.close()
+     iframe.onload=()=>{
+         iframe.height = iframe.contentWindow.
+         document.body.scrollHeight + "px";
+     }
+     iframe.height = iframe.contentWindow.
+     document.body.scrollHeight + "px";
+        this.setState({pages:e.pages,
+            length:e.length,error:false})
+    })
     }
     componentDidMount(){
+        const  iframe=document.getElementById('doc').dir='rtl'
+        console.log(iframe)
 
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
+        socket.emit('addview',this.props.name)
         
-        socket.on('note-was-found',(e)=>{
-            hide()
-         const  iframe=document.getElementById('doc')
-         iframe.contentDocument.open()   
-         iframe.contentDocument.write(((e.text).trim())
-            .replace(/\uFFFD/g, ''))
-        iframe.contentDocument.close()
-
-        iframe.height = iframe.contentWindow.
-        document.body.scrollHeight + "px";
-        console.log(iframe.height)
-            this.setState({pages:e.pages,
-                length:e.length,error:false})
-        })
+       
         if(getCookie("Username")){
         socket.emit('isliked',{
             name:getCookie("Username"),
@@ -61,14 +68,16 @@ class Note extends React.Component{
         })}
     }
     componentWillReceiveProps(e){
-       
+        const  iframe=document.getElementById('doc')
+        iframe.height='1px'
+        socket.emit('find-note',{name:e.name,num:e.num})
         show()
         document.body.scrollTop = document.documentElement.scrollTop = 0;
-        socket.emit('find-note',{name:e.name,num:e.num})
         
     }
     like(e){
         if(can){
+            if(e.target.style.color){
         socket.emit('addlike',{
             note:this.props.name,
             name:getCookie("Username")
@@ -84,7 +93,7 @@ class Note extends React.Component{
                     can=true
                 },1000)
                 can=false
-            }
+            }}
             
         }
 
@@ -100,6 +109,7 @@ class Note extends React.Component{
             link:window.location.pathname,
             name:getCookie('Username')?getCookie('Username'):
             localStorage.getItem('key')})
+            info('info','Reported')
         })
     }
     view(e){
@@ -118,6 +128,23 @@ class Note extends React.Component{
             <div>
             <div style={{display: 'flex',
              justifyContent:'space-around'}}>
+             {
+       getCookie('ider')=='5cb9b96c02d8571774e83f1c'?
+       <div>
+       <h1 onClick={()=>{
+           confirm('are u sure?','',()=>{
+           socket.emit('removenote',{
+            note:this.props.name,
+            name:getCookie("Username")
+            ,ider:getCookie("id"),
+            pass:getCookie("pass")
+           })
+              
+           })
+       }}>remove</h1>
+             <br/>
+       </div>:""
+             }
                  {
                  getCookie("Username")&&!this.state.error?
             
@@ -150,7 +177,7 @@ class Note extends React.Component{
             </select>
             </div>
             <iframe id='doc' style={{width:'100%',
-            backgroundColor:"white"}}/>
+            backgroundColor:"white",direction:'rtl'}}/>
             </div>
             </div>
             :

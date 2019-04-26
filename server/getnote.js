@@ -1,6 +1,7 @@
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const path=require("path")
+const fs =require('fs')
 
 
 function waleed(data,socket){
@@ -53,39 +54,38 @@ socket.on("notes-files",(r)=>{
     })
   socket.on("find-note",(e)=>{
     try{
-      JSDOM.fromFile(path.join(__dirname,'..','notes',e.name),'utf8'
-      ).then(dom => {
-      let elements= dom.window.document.body.children[0]
-          .children
+      fs.readFile(path.join(__dirname,'..','notes',e.name),'utf8'
+      ,(error,dom) => {
+        const elements=new JSDOM(dom).window.document.children[0].
+        children[1].children
         const result = Object.keys(elements).map(function(key) {
-          return elements[key].outerHTML;
+            return elements[key].outerHTML.
+            replace(/<img/g,'<img style="max-width:700;max-height:500" ')
         });
         if(e.nopages){
           try{
             socket.emit('note-was-found',
-            {text:result.join('')
-            .replace(/<script/ig).replace(/<img/ig).replace(/\uFFFD/g,'')
-            .replace(/\u00bf/g,'').replace(/\u00bd/g,'').trim()
+            {text:result
               }
               )
-          }catch(e){console.log(e)}
+          }catch(e){
+      socket.emit('note-was-notfound')
+      }
         }else{
           try{
             socket.emit('note-was-found',
-            {text:result.slice((e.num-1)*30,e.num*30).join("")
-            .replace(/<script/ig).replace(/<img/ig).replace(/\uFFFD/g,'')
-            .replace(/\u00bf/g,'').replace(/\u00bd/g,'').trim()
+            {text:result.slice((e.num-1)*20,e.num*20)
               ,pages:result[1]?true:false,
-              length:result.length/30}
+              length:result.length/20}
               )
-          }catch(e){console.log(e)}
+          }catch(e){
+      socket.emit('note-was-notfound')
+            }
         }
-        }).catch(()=>{
-          socket.emit('note-was-notfound')
         })
     }
     catch(e){
-      console.log(e)
+      
       socket.emit('note-was-notfound')
     }
       

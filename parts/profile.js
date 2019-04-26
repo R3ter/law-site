@@ -12,6 +12,7 @@ const socket=io()
 class Profile extends React.Component{
     constructor(e){
         super(e)
+
         reader.onload = () => {
             show()
             socket.emit('uploadimg',
@@ -79,7 +80,10 @@ socket.on('userinfo',(e)=>{
     }
     })
 }) }
-
+componentDidMount(){
+    document.body.scrollTop =
+    document.documentElement.scrollTop = 0;
+}
 componentWillReceiveProps(e){
     this.setState(()=>{
         return {notfound:false}

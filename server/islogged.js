@@ -3,7 +3,7 @@ const time=require('./../time')
 
 
 const islogged=(e,data,callback,socket)=>{
-    if(ObjectID.isValid(e.ider)){
+    if(e&&ObjectID.isValid(e.ider)){
         data.db().collection("login").find({_id:new ObjectID(e.ider),
         username:e.name,id:e.pass}).toArray(
         (eror,result)=>{

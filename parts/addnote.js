@@ -9,7 +9,8 @@ const reader  = new FileReader();
 
 const upload=()=>{
     show()
-  const error=document.getElementById('error');
+
+    const error=document.getElementById('error');
   const file=document.getElementById('note-file').files[0]
   const name=document.getElementById('note-name').value
   const writer=document.getElementById('note-author').value
@@ -41,10 +42,9 @@ else if(name.length<10){
     document.getElementById('note-author').style.borderColor='red'
     error.innerHTML='please type author name'
   }else{
-      if(file.name.split('.').pop()=='html'||
-      file.name.split('.').pop()=='htm'){
+      if(file.name.split('.').pop()=='docx'){
           reader.readAsText(file)
-          reader.onload=()=>{
+          reader.onload=(e)=>{
             Confirm('are you sur you want to upload this',
             'you cant delete it once you have click yes',()=>{
               socket.emit('addnote',{
@@ -60,7 +60,7 @@ else if(name.length<10){
           }
     
       }else{
-          info('error','file must have htm or html extends',
+          info('error','file must have docx extends',
           {text:'look here',onclick:()=>{
             window.location.href='/helpdoc'
           }})

@@ -2,7 +2,9 @@ import './style/style.scss'
 import './style/ask.scss'
 import './style/main.scss'
 import './style/side.scss'
+import './style/foot.scss'
 import './style/questionpage.scss'
+import './style/iframe.scss'
 import './style/pageSelector.scss'
 import './style/confirm.scss'
 import './style/addnote.scss'
@@ -14,11 +16,13 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Top from './parts/top'
 import {BrowserRouter,Route,Link,Switch} from 'react-router-dom';
+
 import Question from './parts/question'
 import QuestionPage from './parts/questionpage'
 import Side from './parts/side'
 import Notes from './parts/notes'
 import Message from './parts/message'
+import Chat from './parts/chat'
 import Laws from './parts/law'
 import Sendmessage from './parts/sendmessage'
 import Note from './parts/note'
@@ -27,37 +31,38 @@ import Law from './parts/lawpage'
 import Ask from './parts/ask'
 import Addnote from './parts/addnote'
 import Profile from './parts/profile'
-import Sign from './parts/sign'
 import Reports from './parts/reports'
 import {hide} from './parts/loading'
 import io from 'socket.io-client'
 import uniqid from 'uniqid'
+import Sign from './parts/sign'
+import Foot from './parts/foot'
 
+// const socket=io()
+// socket.connect('localhost:3000')
 
-const socket=io()
-socket.connect('localhost:3000')
 const ask=()=>{return(
         <Ask/>
     )}
-const log=()=>{
-    return(
-            <Sign/>
-    )
-}
+
 
 class Main extends React.Component{
     
     constructor(e){
         super(e)
+        
         if(!localStorage.getItem('key')){
             localStorage.setItem('key',uniqid())
         }
+        this.update=this.update.bind(this)
     }
-       
+       update(){
+           this.forceUpdate()
+       }
        render(){
         
         return(
-            <BrowserRouter>
+            <BrowserRouter >
             <div>
             <Top/>
             <Side/>
@@ -74,7 +79,11 @@ class Main extends React.Component{
             <Route component={Reports} 
             path="/reportrater*^$" exact />
 
-            <Route component={log} 
+            <Route component={()=>{
+                return(
+            <Sign update={this.update}/>
+                )
+            }} 
             path="/sign" exact />
             
             <Route component={()=><Addnote/>} 
@@ -101,7 +110,7 @@ class Main extends React.Component{
                   return <Laws id={e.match.params.id}/>
               }}/>
               <Route path='/messages' component={()=>{
-                  return <Message/>
+                  return <Chat/>
               }}/>
               <Route path='/sendmessage$:id' component={(e)=>{
                   return <Sendmessage id={e.match.params.id}/>
@@ -138,6 +147,7 @@ class Main extends React.Component{
                  )
              }}/>
             </Switch>
+            <Foot/>
             </div>
             </BrowserRouter>
             )

@@ -3,17 +3,21 @@ import io from 'socket.io-client'
 import {hide,show} from './loading'
 import getCookie from './getcookie';
 import Currenttime from './currenttime';
+import signout from './signout'
+
 import {Link} from 'react-router-dom'
 import Confirm from './confirm'
 import info from './info';
 
 const socket=io()
-let hightext=''
-let textarea;
+
 class QuestionPage extends React.Component{
     constructor(e){
         super(e)
         show()
+        socket.on('notloged',()=>{
+            signout()
+        })
         const checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
         this.addcomment=this.addcomment.bind(this)
         this.scroll=this.scroll.bind(this)
@@ -33,6 +37,7 @@ class QuestionPage extends React.Component{
             info('error',"you cant delete dis after it gets answered")
             hide()
         })
+      
         if(checkForHexRegExp.test(e.id)){
             socket.emit('addviewquestion',e.id)
             socket.emit('dbOne',e.id)
@@ -150,14 +155,7 @@ class QuestionPage extends React.Component{
                 elementlikes[1].innerHTML=e.dislikes
                 hide()
             })
-            socket.on('notloged',()=>{
-                document.cookie = "Username" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-                document.cookie = "id" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-                document.cookie = "pass" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-                localStorage.setItem('before','ask')
-                window.location.href='./sign'
-                hide()
-            })
+           
             socket.on("addcomment",(ee)=>{
                 socket.emit("getcomments",this.props.id)
                 socket.on("getcomments",(e)=>{
@@ -228,7 +226,7 @@ class QuestionPage extends React.Component{
     }catch(e){window.scrollTo(0,0)}
 }
     componentDidMount(){
-       textarea=document.getElementById('textarea')
+        socket.emit('addviewquestion',this.props.id)
         this.scroll()
     }
     componentDidUpdate(){

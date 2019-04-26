@@ -19,6 +19,7 @@ class Laws extends React.Component{
             })
         })
     }
+    
     componentWillReceiveProps(props){
         this.setState(()=>{
             return ({slice:parseInt(props.id)})

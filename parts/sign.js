@@ -5,6 +5,7 @@ import getCookie from './getcookie'
 import info from './info';
 const socket=io();
 
+let update;
 
 const signin=(e)=>{
     e.preventDefault()
@@ -15,6 +16,9 @@ const signin=(e)=>{
             password:e.target.password.value.trim()})
             show()
             socket.on("loggedin",(e)=>{
+            
+                update()
+
             hide()
             document.cookie="Username="+e.username+";"+
             'expires=Thu, 18 Dec 2025 12:00:00 UTC' 
@@ -128,7 +132,9 @@ const clickedsign_in=(e)=>{
     
 
 }
-const Sign=()=>{
+const Sign=(e)=>{
+    console.log(e)
+    update=e.update
     if(getCookie("Username")){
         window.history.back();
     }
