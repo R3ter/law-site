@@ -44,30 +44,22 @@ const Side=()=>{
              width='90' height='60' src="./img1.jpg"/>
             </div>
         <h2>
-             <Link 
-                style={{color:'rgb(49, 226, 250)',
-                textDecoration: 'none'}} to="/notes&1">
+             <Link to="/notes&1">
         notes
         </Link>
         </h2>
         <h2>
-         <Link 
-                style={{color:'rgb(49, 226, 250)',
-                textDecoration: 'none'}} to="/laws">
+         <Link to="/laws">
         laws
         </Link>
         </h2>
         <h2>
-         <Link 
-                style={{color:'rgb(49, 226, 250)',
-                textDecoration: 'none'}} to="/Q&a1">
+         <Link  to="/Q&a1">
         Q&A
         </Link>
         </h2>
         <h2>
-         <Link 
-                style={{color:'rgb(49, 226, 250)',
-                textDecoration: 'none'}} to="/messages">
+         <Link to="/messages">
         chat
         </Link>
         </h2>
@@ -76,9 +68,7 @@ const Side=()=>{
             <div>
             <h2 style={{cursor:"pointer",textAlign:'center'}}
             >
-             <Link 
-                style={{color:'rgb(49, 226, 250)',
-                textDecoration: 'none'}} to={'profile'+getCookie("ider")}>
+             <Link to={'profile'+getCookie("ider")}>
             {getCookie('Username')}
             </Link>
             </h2>

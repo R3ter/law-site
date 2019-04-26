@@ -12,12 +12,25 @@
     opacity: 1;
 }
 .hide-top-side{
-      div{
+    h2:hover{
+        :first-child{
+            color: rgb(255, 255, 255);
+            transition: .21s;
+        }
+    }
+    h2{
+        :first-child{
+            text-decoration: none;
+            color: rgba(158, 158, 158, 0.774);
+        }
+        margin: 2rem;
+    }
+    div{
         h2{
             margin-left: 4rem;
             margin-top: 2rem;
             white-space: nowrap;
-            color:rgb(255, 255, 255);
+            color:white;
         }
     }
     background-color: rgba(28, 151, 173, 0.521);
@@ -38,7 +51,17 @@
 }
 
 .top-side{
+    h2:hover{
+        :first-child{
+            color: rgb(255, 255, 255);
+            transition: .21s;
+        }
+    }
     h2{
+        :first-child{
+            text-decoration: none;
+            color: rgba(158, 158, 158, 0.774);
+        }
         margin: 2rem;
     }
     div{
