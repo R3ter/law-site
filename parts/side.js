@@ -8,10 +8,7 @@ const socket=io();
 
 const signout=()=>{
     socket.emit("signout",getCookie("id"))
-        document.cookie = "Username" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-        document.cookie = "id" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-        document.cookie = "ider" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-        document.cookie = "pass" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        //
         show()
         socket.on("signedouterror",()=>{
             hide()
@@ -46,35 +43,45 @@ const Side=()=>{
              onDragStart={(e)=>{e.preventDefault()}}
              width='90' height='60' src="./img1.jpg"/>
             </div>
+        <h2>
              <Link 
                 style={{color:'rgb(49, 226, 250)',
                 textDecoration: 'none'}} to="/notes&1">
-        <button>notes</button>
+        notes
         </Link>
+        </h2>
+        <h2>
          <Link 
                 style={{color:'rgb(49, 226, 250)',
                 textDecoration: 'none'}} to="/laws">
-        <button>laws</button>
+        laws
         </Link>
+        </h2>
+        <h2>
          <Link 
                 style={{color:'rgb(49, 226, 250)',
                 textDecoration: 'none'}} to="/Q&a1">
-        <button>Q&A</button>
+        Q&A
         </Link>
+        </h2>
+        <h2>
          <Link 
                 style={{color:'rgb(49, 226, 250)',
                 textDecoration: 'none'}} to="/messages">
-        <button>chat</button>
+        chat
         </Link>
-        <button>edary</button>
+        </h2>
+        <h2>edary</h2>
             {getCookie('Username')?
             <div>
+            <h2 style={{cursor:"pointer",textAlign:'center'}}
+            >
              <Link 
                 style={{color:'rgb(49, 226, 250)',
                 textDecoration: 'none'}} to={'profile'+getCookie("ider")}>
-            <h2 style={{cursor:"pointer",textAlign:'center'}}
-            >{getCookie('Username')}</h2>
+            {getCookie('Username')}
             </Link>
+            </h2>
             </div>
            :
             <h2 onClick={()=>{
