@@ -41,7 +41,7 @@ const Side=()=>{
             <img 
             onContextMenu={(e)=>{e.preventDefault()}}
              onDragStart={(e)=>{e.preventDefault()}}
-             width='90' height='60' src="./img1.jpg"/>
+             width='110' height='100' src="./logo.png"/>
             </div>
         <h2>
              <Link to="/notes&1">
@@ -58,21 +58,15 @@ const Side=()=>{
         Q&A
         </Link>
         </h2>
-        <h2>
-         <Link to="/messages">
-        chat
-        </Link>
-        </h2>
-        <h2>edary</h2>
             {getCookie('Username')?
-            <div>
+        <div className='account'>
             <h2 style={{cursor:"pointer",textAlign:'center'}}
             >
              <Link to={'profile'+getCookie("ider")}>
             {getCookie('Username')}
             </Link>
             </h2>
-            </div>
+        </div>
            :
             <h2 onClick={()=>{
             window.scrollTo(0,0)

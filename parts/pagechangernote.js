@@ -15,30 +15,32 @@ return(
             <div style={{display:"inline-block"}}>
              <Link 
                 style={{color:'rgb(49, 226, 250)',
-                textDecoration: 'none'}} to={e.link+1}>
+                textDecoration: 'none'}} to={e.link+1+
+                (e.extension?e.extension:'')}>
             <button>{"<<"}</button>
             </Link>
              <Link 
                 style={{color:'rgb(49, 226, 250)',
                 textDecoration: 'none'}} to={e.link+
-            (parseInt(e.page)-1)}>
+            (parseInt(e.page)-1)+(e.extension?e.extension:'')}>
             <button>{"<"}</button>
             </Link>
             </div>:''}
             {array.slice(parseInt(e.page)<3?0:
             parseInt(e.page)-3,
             parseInt(e.page)+2)
-            .map((e,i)=>{
-                if(e==currentpage){
-                    return <button key={i} id='currentpage'>{e}</button>}
+            .map((ea,i)=>{
+                if(ea==currentpage){
+                    return <button key={i} id='currentpage'>{ea}</button>}
             return( <Link key={i}
                 style={{color:'rgb(49, 226, 250)',
-                textDecoration: 'none'}} to ={link+(e)}>
+                textDecoration: 'none'}} to ={link+(ea)
+                +(e.extension?e.extension:'')}>
                  <button key={i}
                 onClick={()=>{
                     // document.body.scrollTop =
                     //  document.documentElement.scrollTop = 0;
-                }}>{e}</button>
+                }}>{ea}</button>
                 </Link>)
             })}
             {parseInt(e.page)!=array.length?
@@ -46,12 +48,13 @@ return(
              <Link 
                 style={{color:'rgb(49, 226, 250)',
                 textDecoration: 'none'}} to={link+
-            (parseInt(e.page)+1)}>
+            (parseInt(e.page)+1)+(e.extension?e.extension:'')}>
             <button>{">"}</button>
             </Link>
              <Link 
                 style={{color:'rgb(49, 226, 250)',
-                textDecoration: 'none'}} to={e.link+array.length}>
+                textDecoration: 'none'}} to={e.link+array.length
+                +((e.extension?e.extension:''))}>
             <button>>></button>
             </Link>
             </div>:''}

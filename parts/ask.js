@@ -30,8 +30,8 @@ const Ask=()=>{
             socket.on('notloged',()=>{
                 signout()
             })
-            socket.on("added",()=>{
-                window.location.href='./Q&a1'
+            socket.on("added",(e)=>{
+                window.location.href='./question'+e
                 hide()
             })
         }else{

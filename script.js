@@ -99,6 +99,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 // const socket=io()
 // socket.connect('localhost:3000')
 var ask = function ask() {
+  document.title = 'ask some shit';
   return _react["default"].createElement(_ask2["default"], null);
 };
 
@@ -134,8 +135,8 @@ function (_React$Component) {
 
       return _react["default"].createElement(_reactRouterDom.BrowserRouter, null, _react["default"].createElement("div", null, _react["default"].createElement(_top["default"], null), _react["default"].createElement(_side2["default"], null), _react["default"].createElement(_reactRouterDom.Switch, null, _react["default"].createElement(_reactRouterDom.Route, {
         component: function component(e) {
-          // document.body.scrollTop =
-          // document.documentElement.scrollTop = 0;
+          document.title = 'Question';
+          document.body.scrollTop = document.documentElement.scrollTop = 0;
           return _react["default"].createElement(_questionpage2["default"], {
             id: e.match.params.id
           });
@@ -167,10 +168,29 @@ function (_React$Component) {
       }), _react["default"].createElement(_reactRouterDom.Route, {
         path: "/profile:id",
         component: function component(e) {
-          // document.body.scrollTop =
-          // document.documentElement.scrollTop = 0;
+          document.body.scrollTop = document.documentElement.scrollTop = 0;
           return _react["default"].createElement(_profile2["default"], {
             name: e.match.params.id
+          });
+        },
+        exact: true
+      }), _react["default"].createElement(_reactRouterDom.Route, {
+        path: "/",
+        component: function component(e) {
+          document.body.scrollTop = document.documentElement.scrollTop = 0;
+          return _react["default"].createElement(_question["default"], {
+            page: 1,
+            type: e.match.params.type
+          });
+        },
+        exact: true
+      }), _react["default"].createElement(_reactRouterDom.Route, {
+        path: "/Q&a:page$:type",
+        component: function component(e) {
+          document.body.scrollTop = document.documentElement.scrollTop = 0;
+          return _react["default"].createElement(_question["default"], {
+            page: e.match.params.page,
+            type: e.match.params.type
           });
         },
         exact: true
@@ -186,6 +206,7 @@ function (_React$Component) {
       }), _react["default"].createElement(_reactRouterDom.Route, {
         path: "/notes&:page",
         component: function component(e) {
+          document.body.scrollTop = document.documentElement.scrollTop = 0;
           return _react["default"].createElement(_notes2["default"], {
             page: e.match.params.page
           });

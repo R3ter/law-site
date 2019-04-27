@@ -41,7 +41,9 @@ import Foot from './parts/foot'
 // const socket=io()
 // socket.connect('localhost:3000')
 
-const ask=()=>{return(
+const ask=()=>{
+    document.title='ask some shit'
+    return(
         <Ask/>
     )}
 
@@ -68,8 +70,9 @@ class Main extends React.Component{
             <Side/>
             <Switch>
             <Route component={(e)=>{
-            // document.body.scrollTop =
-            // document.documentElement.scrollTop = 0;
+            document.title='Question'
+            document.body.scrollTop =
+            document.documentElement.scrollTop = 0;
                 return(<QuestionPage id={e.match.params.id}/>)}}
             path="/question:id" exact />
 
@@ -90,17 +93,35 @@ class Main extends React.Component{
             path="/addnote" exact />
 
             <Route path="/profile:id" component={(e)=>{
-            // document.body.scrollTop =
-            // document.documentElement.scrollTop = 0;
+            document.body.scrollTop =
+            document.documentElement.scrollTop = 0;
                  return <Profile name={e.match.params.id}/>
+             }}  exact />
+            
+            <Route path="/" component={(e)=>{
+            document.body.scrollTop =
+            document.documentElement.scrollTop = 0;
+                 return <Question page={1}
+                 type={e.match.params.type} />
+             }}  exact />
+
+            <Route path="/Q&a:page$:type" component={(e)=>{
+            document.body.scrollTop =
+            document.documentElement.scrollTop = 0;
+                 return <Question page={e.match.params.page}
+                 type={e.match.params.type} />
              }}  exact />
 
             <Route path="/Q&a:page" component={(e)=>{
             document.body.scrollTop =
             document.documentElement.scrollTop = 0;
-                 return <Question page={e.match.params.page} />
+                 return <Question page={e.match.params.page}
+                  />
              }}  exact />
+
              <Route path='/notes&:page' component={(e)=>{
+                   document.body.scrollTop =
+                    document.documentElement.scrollTop = 0;
                  return <Notes page={e.match.params.page}/>
              }} />
              <Route path='/note-info:id' component={(e)=>{

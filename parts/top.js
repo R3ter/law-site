@@ -33,24 +33,36 @@ class Top extends React.Component{
         <br/>
         <h1>KDA'A.com</h1>
         <br/>
-        <p>mostashark</p>
-        <br/>
+        <div className='mainbuttons'>
 
          <Link 
                 style={{color:'rgb(49, 226, 250)',
                 textDecoration: 'none'}} to="/notes&1">
-        <button>notes</button>
+        <div style={{display:'inline-block'}}>
+                <img width='70' height='70'
+                 src='/note.png' />
+                <h2>notes</h2>
+                </div>
         </Link>
          <Link 
                 style={{color:'rgb(49, 226, 250)',
                 textDecoration: 'none'}} to="/Q&a1">
-        <button>Q&A</button>
+                <div style={{display:'inline-block'}}>
+                <img width='70' height='70'
+                 src='/questionsicon.png' />
+                <h2>Q&A</h2>
+                </div>
         </Link>
          <Link 
                 style={{color:'rgb(49, 226, 250)',
                 textDecoration: 'none'}} to="/laws&1">
-        <button>laws</button>
+        <div style={{display:'inline-block'}}>
+                <img width='70' height='70'
+                 src='/book.png' />
+                <h2>laws</h2>
+                </div>
         </Link>
+        </div>
          {/* <Link 
                 style={{color:'rgb(49, 226, 250)',
                 textDecoration: 'none'}} to="/messages">

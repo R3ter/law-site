@@ -16,8 +16,9 @@ const add=(e,data,socket)=>{
         views:0,
         answers:0,
         date:time()}
-      ).then(()=>{
-      socket.emit("added","added")
+      ).then((result)=>{
+        console.log(error)
+      socket.emit("added",result.ops[0]._id)
         }).catch((error)=>{
       console.error("error\n"+error)
       })}

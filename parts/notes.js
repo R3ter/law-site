@@ -36,19 +36,19 @@ class Notes extends React.Component{
         })
     }
     componentWillReceiveProps(e){
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-        
         document.getElementById('loading-notes').
-                style.display="block"
+        style.display="block"
         socket.emit('notes-files',{number:e.page})
         socket.on('notes-files',(e)=>{
             this.setState({array:e.array
                 ,length:e.length},()=>{
-                document.getElementById('loading-notes').
-                style.display="none"
+                    document.getElementById('loading-notes').
+                    style.display="none"
+                    document.body.scrollTop = 0;
+                    document.documentElement.scrollTop = 0;
+                    
+                })
             })
-        })
     }
     search(e){
         e.preventDefault()
@@ -118,14 +118,15 @@ class Notes extends React.Component{
                 this.state.notsearch?
                 this.state.array.map((e)=>{
                     /////////hada
-                return(<div style={{position:'relative'}}
+                return(
+                    <div style={{position:'relative'}}
                  className='notes'>
                 <div style={{position:'absolute',
                 top:"20%",
                 left:"4%"}}>
                  <Link 
                 style={{color:'rgb(49, 226, 250)',
-                textDecoration: 'none'}} style={{opacity:0,color:"rgba(0,0,0,0)"}}
+                textDecoration: 'none'}} 
                  to={"./note-info:"+e.name}>
                     <h2 title="info"
                     style={{fontSize:"4rem",
@@ -133,13 +134,15 @@ class Notes extends React.Component{
                 </Link>
                 </div>
                 <div>
+                <div className='notename'>
                  <Link 
-                style={{color:'rgb(49, 226, 250)',
-                textDecoration: 'none'}} to={'./note&'+e.name+"&1"}>
-                    <h1 style={{display:'inline-block',
-                    padding:"1rem",color:'rgb(116, 85, 145)'}}
-                    >{e.name}</h1>
+                style={{textDecoration: 'none'}}
+                 to={'./note&'+e.name+"&1"}>
+                    <h1 style={{display:'inline-block'}}
+                    >
+                    {e.name}</h1>
                 </Link>
+                </div>
                     <p style={{padding:"1rem"}} 
                     >{e.author}: author</p>
 

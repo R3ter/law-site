@@ -10,11 +10,13 @@ const socket=io()
 class Question extends React.Component{
     constructor(e){
         super(e)
+    
     show()
     this.search=this.search.bind(this)
     this.sort=this.sort.bind(this)
         this.state={qeustions:[]}
-            socket.emit('db',{number:parseInt(e.page)})
+            socket.emit('db',{number:parseInt(e.page),
+            type:e.type})
             socket.emit('gettime')
             socket.on('gettime',(e)=>{
                 this.setState(()=>{
@@ -33,8 +35,22 @@ class Question extends React.Component{
         show()
         document.body.scrollTop =
         document.documentElement.scrollTop = 300;
-        socket.emit('db',{number:parseInt(e.page)})
+        socket.emit('db',{number:parseInt(e.page),
+            type:this.props.type})
+        
+    }
 
+
+    componentDidMount(){
+        console.log(this.props)
+        let children= document.getElementById('type').children
+        if(this.props.type=="Hot"){
+            children[0]
+            .style.backgroundColor='rgb(46, 3, 3)'
+        }else{
+            children[1]
+            .style.backgroundColor='rgb(46, 3, 3)'  
+        }
     }
     search(e){
         e.preventDefault()
@@ -96,6 +112,7 @@ class Question extends React.Component{
                 textDecoration: 'none'}} to="/ask">
                 <button className="askbutton">اسال سؤال</button>
                 </Link>
+                
                 <br/>
                 <br/>
                 <br/>
@@ -104,6 +121,19 @@ class Question extends React.Component{
 
                 <div className="questions">
                 <br/>
+                <div id="type" className="type">
+                    <h2>
+                    <Link to="./Q&A1$Hot">
+                    Hot
+                    </Link>
+                    </h2>
+                    <h2>
+                    <Link to="./Q&A1">
+                    New
+                    </Link>
+                    </h2>
+                    
+                </div>
                 <div
                 style={{position:'relative'}}
                  className="loading" id="loading-question"></div>
@@ -137,7 +167,8 @@ class Question extends React.Component{
 
                     <Pagechangernote page={this.props.page} 
                     length={this.state.length/10}
-                     link={'/Q&a'} 
+                     link={'/Q&a'}
+                     extension={this.props.type?"$"+this.props.type:''}
                      />
                 </div>
             </div>

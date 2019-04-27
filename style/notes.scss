@@ -1,7 +1,18 @@
 .notes{
-    h1{
-        display: inline-block;
-        margin-left: 10%;
+    .notename{
+        :first-child:hover{
+            color:rgb(255, 255, 255);
+            transition: .21s;            
+        }
+        :first-child{
+            color:rgba(255, 255, 255, 0.644);
+            margin-right: 10px;
+            h1{
+                display: inline-block;
+
+            }
+            transition: .21s;            
+        }
     }
     p{
         margin-left: 10%;
