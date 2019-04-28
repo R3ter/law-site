@@ -42,11 +42,13 @@ else if(name.length<10){
     document.getElementById('note-author').style.borderColor='red'
     error.innerHTML='please type author name'
   }else{
+    hide()
       if(file.name.split('.').pop()=='docx'){
           reader.readAsText(file)
           reader.onload=(e)=>{
             Confirm('are you sur you want to upload this',
             'you cant delete it once you have click yes',()=>{
+              show()
               socket.emit('addnote',{
                   notename:name,description:description,file:file,
                   name:getCookie("Username"),

@@ -114,10 +114,6 @@ class Question extends React.Component{
                 </Link>
                 
                 <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
 
                 <div className="questions">
                 <br/>
