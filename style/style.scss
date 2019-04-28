@@ -2,6 +2,14 @@
     background-color: rgb(58, 65, 71);
     transition: .2s;
 }
+.mainbuttons div h2{
+    color:rgba(0, 0, 0, 0.651);
+    transition: .2s;
+}
+.mainbuttons div h2:hover{
+    color:rgba(255, 255, 255, 0.822);
+    transition: .2s;
+}
 .mainbuttons{
     margin: 2rem;
     div{

@@ -49,7 +49,7 @@ const Side=()=>{
         </Link>
         </h2>
         <h2>
-         <Link to="/laws">
+         <Link to="/laws&1">
         laws
         </Link>
         </h2>

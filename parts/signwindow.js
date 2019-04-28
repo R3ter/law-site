@@ -148,9 +148,17 @@ else{
                 style={{color:'rgb(49, 226, 250)',
                 textDecoration: 'none'}} to={"profile"+getCookie("ider")}>
            {this.state.name}</Link></h2>
-           <button style={{backgroundColor:'rgba(255, 232, 25, 1)'}}
-            onClick={this.signout}
-           >Sign Out</button>
+           <div  onClick={this.signout}>
+           <img width="70" height="70"
+           style={{position:'absolute'
+           , left:'3rem',cursor:'pointer'}}
+           src="/logout.png"/>
+           <h2 style={{position:'absolute',
+           color:'red',
+           cursor:'pointer',
+           left:'2rem',
+           top:'10rem'}}>Sign out</h2>
+           </div>
        </div> 
     )
 }

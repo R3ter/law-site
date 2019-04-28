@@ -41,7 +41,7 @@ class Top extends React.Component{
         <div style={{display:'inline-block'}}>
                 <img width='70' height='70'
                  src='/note.png' />
-                <h2>notes</h2>
+                <h2>تلخيصات</h2>
                 </div>
         </Link>
          <Link 
@@ -50,7 +50,7 @@ class Top extends React.Component{
                 <div style={{display:'inline-block'}}>
                 <img width='70' height='70'
                  src='/questionsicon.png' />
-                <h2>Q&A</h2>
+                <h2>أسئلة</h2>
                 </div>
         </Link>
          <Link 
@@ -59,7 +59,7 @@ class Top extends React.Component{
         <div style={{display:'inline-block'}}>
                 <img width='70' height='70'
                  src='/book.png' />
-                <h2>laws</h2>
+                <h2>القوانين</h2>
                 </div>
         </Link>
         </div>
